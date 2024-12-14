@@ -18,12 +18,15 @@ public class OverlayView extends View {
 
     private final Rect bounds = new Rect();
 
+    private PredictionDB db;
+
     private static final int BOUNDING_RECT_TEXT_PADDING = 5;
 
     public OverlayView(Context context, AttributeSet attrs){
         super(context, attrs);
         initPaints(context);
 
+        db = new PredictionDB(getContext());
     }
     private void initPaints(Context context){
         textBgPaint = new Paint();
@@ -82,6 +85,8 @@ public class OverlayView extends View {
                         top, textBgPaint);
                 canvas.drawText(combinedText,left,top - BOUNDING_RECT_TEXT_PADDING
                         ,textPaint);
+
+                db.insertPrediction(className);
             }
         }
     }

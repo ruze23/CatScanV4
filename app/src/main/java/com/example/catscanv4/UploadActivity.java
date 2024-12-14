@@ -55,8 +55,6 @@ public class UploadActivity extends AppCompatActivity implements Detector.Detect
         detector = new Detector(getBaseContext(), Constants.MODEL_PATH,Constants.LABELS_PATH,this,this);
         detector.SetupAsync();
 
-
-
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

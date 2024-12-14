@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(),"Home Button working!", Toast.LENGTH_SHORT).show();
             }
         });
 
         logs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(),"Logs Button working!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, LogsActivity.class);
+                startActivity(intent);
             }
         });
     }

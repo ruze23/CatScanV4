@@ -57,6 +57,7 @@ public class Detector {
     private final DetectorListener detectorListener;
     private final OnModelSetupListener callBack;
 
+
     public Detector(Context context, String modelPath, String labelPath, DetectorListener detectorListener, OnModelSetupListener callBack){
         this.context = context;
         this.modelPath = modelPath;
@@ -218,9 +219,8 @@ public class Detector {
         while(!sortedBoxes.isEmpty()){
             BoundingBox first = sortedBoxes.get(0);
             selectedBoxes.add(first);
-            sortedBoxes.remove(0);
 
-            Iterator<BoundingBox> iterator = sortedBoxes.iterator();
+            Iterator<BoundingBox> iterator = sortedBoxes.listIterator(1);
             while(iterator.hasNext()){
                 BoundingBox nextBox = iterator.next();
                 float iou = calculateIOU(first, nextBox);
@@ -228,6 +228,7 @@ public class Detector {
                     iterator.remove();
                 }
             }
+            sortedBoxes.remove(0);
         }
         return selectedBoxes;
     }
