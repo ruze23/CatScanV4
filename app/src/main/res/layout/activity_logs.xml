@@ -16,11 +16,51 @@
     <ListView
         android:id="@+id/listview"
         android:layout_width="325dp"
-        android:layout_height="480dp"
+        android:layout_height="440dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="38dp"/>
+        android:layout_marginBottom="80dp"/>
+
+    <Button
+        android:id="@+id/btnResetLogs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset Logs"
+        app:layout_constraintEnd_toEndOf="@id/listview"
+        app:layout_constraintStart_toStartOf="@id/listview"
+        app:layout_constraintTop_toBottomOf="@+id/listview"
+        android:layout_marginTop="88dp"/>
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/btnResetLogs"/>
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/btnResetLogs"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btnLogs"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="83dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/btnResetLogs"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

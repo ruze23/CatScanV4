@@ -18,34 +18,33 @@
         android:id="@+id/btnScan"
         android:layout_width="110dp"
         android:layout_height="100dp"
-        android:layout_marginTop="372dp"
-        android:layout_marginStart="122dp"
-        android:background="@android:color/holo_red_dark"
+        android:layout_marginTop="410dp"
+        android:layout_marginStart="145dp"
+        android:background="@android:color/transparent"
         />
 
     <Button
         android:id="@+id/btnHome"
         android:layout_width="70dp"
         android:layout_height="69dp"
-        android:layout_marginStart="169dp"
-        android:layout_marginTop="658dp"
-        android:background="@android:color/holo_red_dark" />
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="770dp"
+        android:background="@android:color/transparent" />
 
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="70dp"
         android:layout_height="69dp"
-        android:layout_marginStart="79dp"
-        android:layout_marginTop="658dp"
-        android:background="@android:color/holo_red_dark" />
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="770dp"
+        android:background="@android:color/transparent" />
 
     <Button
         android:id="@+id/btnLogs"
         android:layout_width="70dp"
         android:layout_height="69dp"
-        android:layout_marginStart="257dp"
-        android:layout_marginTop="658dp"
-        android:background="@android:color/holo_red_dark" />
-
+        android:layout_marginStart="253dp"
+        android:layout_marginTop="770dp"
+        android:background="@android:color/transparent" />
 
 </RelativeLayout>

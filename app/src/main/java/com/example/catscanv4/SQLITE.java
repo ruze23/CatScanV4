@@ -11,7 +11,7 @@ public class SQLITE extends SQLiteOpenHelper {
 
     public static final String TABLE_PREDICTIONS = "predictions";
     public static final String COLUMN_ID = "id";
-    public static final String COLUMN_PREDICTION = "prediction";
+        public static final String COLUMN_PREDICTION = "prediction";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_PREDICTIONS + " (" +

@@ -1,9 +1,13 @@
 package com.example.catscanv4;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +47,10 @@ public class ScanActivity extends AppCompatActivity implements Detector.Detector
     Detector detector;
     private OverlayView overlay;
 
+    Button upload, home, logs;
+
+    private Boolean isCameraInitialized = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +65,53 @@ public class ScanActivity extends AppCompatActivity implements Detector.Detector
 
         cameraExecutor = Executors.newSingleThreadExecutor();
 
+        upload = findViewById(R.id.btnUpload);
+        home = findViewById(R.id.btnHome);
+        logs = findViewById(R.id.btnLogs);
+
         cameraStart();
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScanActivity.this, UploadActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScanActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        logs.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScanActivity.this, LogsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void cameraStart(){
-        ListenableFuture <ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
-        cameraProviderFuture.addListener(() ->{
-            try{
-                cameraProvider = cameraProviderFuture.get();
-                bindCameraUses();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }, ContextCompat.getMainExecutor(this));
+        if (cameraProvider != null){
+            bindCameraUses();
+        }else{
+            ListenableFuture <ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+            cameraProviderFuture.addListener(() ->{
+                try{
+                    cameraProvider = cameraProviderFuture.get();
+                    bindCameraUses();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }, ContextCompat.getMainExecutor(this));
+        }
+
     }
 
     private void bindCameraUses(){
@@ -127,17 +169,16 @@ public class ScanActivity extends AppCompatActivity implements Detector.Detector
 
         try{
             camera = cameraProvider.bindToLifecycle(
-                    this,
+                    ScanActivity.this,
                     cameraSelector,
                     preview,
                     imageAnalyzer
             );
-
             preview.setSurfaceProvider(binding.cameraPreview.getSurfaceProvider());
         }catch (Exception e){
             Log.e("Error", "Use case binding failed");
         }
-    }
+        }
 
     @Override
     public void onDestroy(){
@@ -152,7 +193,12 @@ public class ScanActivity extends AppCompatActivity implements Detector.Detector
     @Override
     public void onResume(){
         super.onResume();
-        cameraStart();
+        if(!isCameraInitialized ){
+            cameraStart();
+        }else{
+            cameraStart();
+        }
+
     }
 
     @Override
@@ -160,6 +206,7 @@ public class ScanActivity extends AppCompatActivity implements Detector.Detector
         super.onPause();
         if(cameraProvider != null){
             cameraProvider.unbindAll();
+            isCameraInitialized = false;
         }
     }
 

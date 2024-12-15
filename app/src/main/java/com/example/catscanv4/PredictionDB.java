@@ -22,7 +22,16 @@ public class PredictionDB {
 
         values.put(SQLITE.COLUMN_PREDICTION, prediction);
         db.insert(SQLITE.TABLE_PREDICTIONS,null,values);
+
         db.close();
+    }
+
+    public void resetLogs(){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(SQLITE.TABLE_PREDICTIONS,null, null);
+
+        db.close();
+
     }
 
     public List<String> fetchDB(){

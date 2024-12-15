@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -35,11 +36,13 @@ import java.util.List;
 
 public class UploadActivity extends AppCompatActivity implements Detector.DetectorListener, Detector.OnModelSetupListener {
 
-    Button upload;
+    Button upload, btnUpload, home, logs;
     ImageView uploadPreview;
     Bitmap image,correctedBitmap;
     Detector detector;
     OverlayView overlay;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,10 @@ public class UploadActivity extends AppCompatActivity implements Detector.Detect
 
         upload = findViewById(R.id.btnUploadImg);
         uploadPreview = findViewById(R.id.uploadedImg);
+
+        btnUpload = findViewById(R.id.btnUpload);
+        home = findViewById(R.id.btnHome);
+        logs = findViewById(R.id.btnLogs);
 
         overlay = findViewById(R.id.overlayUp);
 
@@ -63,6 +70,29 @@ public class UploadActivity extends AppCompatActivity implements Detector.Detect
                 }else{
                     imagePicker();
                 }
+            }
+        });
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getBaseContext(), "Upload", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UploadActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        logs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UploadActivity.this, LogsActivity.class);
+                startActivity(intent);
             }
         });
     }

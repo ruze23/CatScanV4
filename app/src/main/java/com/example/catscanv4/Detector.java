@@ -132,9 +132,9 @@ public class Detector {
         });
     }
 
-    public Bitmap detect(Bitmap frame){
-        if(interpreter == null) return frame;
-        if(tensorWidth == 0 || tensorHeight == 0 || numElements ==0 ||  numChannel == 0) return frame;
+    public void detect(Bitmap frame){
+        if(interpreter == null) return ;
+        if(tensorWidth == 0 || tensorHeight == 0 || numElements ==0 ||  numChannel == 0) return ;
 
         Long inferenceTime = SystemClock.uptimeMillis();
 
@@ -160,11 +160,11 @@ public class Detector {
 
         if(bestBoxes == null){
             detectorListener.onEmptyDetect();
-            return frame;
+            return ;
         }
         detectorListener.onDetect(bestBoxes);
 
-        return frame;
+        return;
     }
 
     private List<BoundingBox> bestBox(float[] floatArray){
@@ -219,8 +219,9 @@ public class Detector {
         while(!sortedBoxes.isEmpty()){
             BoundingBox first = sortedBoxes.get(0);
             selectedBoxes.add(first);
+            sortedBoxes.remove(first);
 
-            Iterator<BoundingBox> iterator = sortedBoxes.listIterator(1);
+            Iterator<BoundingBox> iterator = sortedBoxes.iterator();
             while(iterator.hasNext()){
                 BoundingBox nextBox = iterator.next();
                 float iou = calculateIOU(first, nextBox);
@@ -228,7 +229,6 @@ public class Detector {
                     iterator.remove();
                 }
             }
-            sortedBoxes.remove(0);
         }
         return selectedBoxes;
     }

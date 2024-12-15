@@ -72,7 +72,7 @@ public class OverlayView extends View {
                 canvas.drawRect(left, top, right, bottom, BoxPaint);
 
                 float confVal = result.getCnf();
-                String combinedText  = className + " " + String.format("%.2f", confVal);
+                String combinedText  = className + " " + String.format("%.2f", confVal * 100);
 
 
                 textBgPaint.getTextBounds(combinedText,0,combinedText.length(),bounds);
